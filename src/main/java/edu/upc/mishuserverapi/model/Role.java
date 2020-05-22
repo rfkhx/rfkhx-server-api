@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +33,7 @@ public class Role {
   private Long id;
 
   private String name;
+  @JsonIgnore
   @ManyToMany(mappedBy = "roles")
   private Collection<User> users;
 

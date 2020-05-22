@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +32,7 @@ public class Privilege {
  
     private String name;
  
+    @JsonIgnore
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
 }

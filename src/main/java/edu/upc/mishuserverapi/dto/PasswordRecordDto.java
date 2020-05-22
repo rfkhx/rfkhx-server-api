@@ -1,4 +1,4 @@
-package edu.upc.mishuserverapi.model;
+package edu.upc.mishuserverapi.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,18 +25,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-@Entity
-public class PasswordRecord implements Serializable {
+public class PasswordRecordDto implements Serializable {
     /**
      *
      */
-    private static final long serialVersionUID = -6466881917829864201L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @ManyToOne
-    private User user;
+    private static final long serialVersionUID = 1L;
     // 记录的类型，当前阶段应为login
     private String type;
     //记录的名字。如“百度”
@@ -51,7 +42,4 @@ public class PasswordRecord implements Serializable {
     private String password;
     //文本记录，留给用户自己记点东西
     private String note;
-
-    private Timestamp synctimestamp;
-
 }
