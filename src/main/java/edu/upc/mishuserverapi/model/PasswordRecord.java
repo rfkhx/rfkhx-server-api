@@ -1,6 +1,12 @@
 package edu.upc.mishuserverapi.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,17 +18,22 @@ import lombok.ToString;
 /**
  * 存储密码记录的表（加密过）
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @ToString
+@Entity
 public class PasswordRecord implements Serializable {
     /**
      *
      */
     private static final long serialVersionUID = -6466881917829864201L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     // 记录的类型，当前阶段应为login
     private String type;
     //记录的名字。如“百度”
@@ -35,5 +46,7 @@ public class PasswordRecord implements Serializable {
     private String password;
     //文本记录，留给用户自己记点东西
     private String note;
+
+    private Timestamp synctimestamp;
 
 }
