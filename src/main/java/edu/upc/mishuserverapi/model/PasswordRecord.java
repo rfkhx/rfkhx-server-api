@@ -38,6 +38,7 @@ public class PasswordRecord implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @JsonIgnore
     private User user;
     // 记录的类型，当前阶段应为login
     private String type;
