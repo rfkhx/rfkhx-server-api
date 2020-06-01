@@ -4,10 +4,14 @@ import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.upc.mishuserverapi.dto.PasswordRecordDto;
@@ -50,5 +54,15 @@ public class PasswordRecordController {
         passwordRecord.setUser(user);
         passwordRecord.setUsername(passwordRecordDto.getUsername());
         return passwordRecordRepository.saveAndFlush(passwordRecord);
+    }
+
+    @DeleteMapping
+    void delete(@RequestParam(required = false) String name,@RequestParam(required = false) String username,Principal principal,HttpServletResponse response){
+        User user=userRepository.findByEmail(principal.getName());
+        if(name==null&&username==null){
+            passwordRecordRepository.deleteAll();
+        }else{
+            passwordRecordRepository.deleteByUserAndNameAndUsername(user, name, username);
+        }
     }
 }
