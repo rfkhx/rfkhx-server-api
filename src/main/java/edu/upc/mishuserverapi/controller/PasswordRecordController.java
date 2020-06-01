@@ -43,7 +43,7 @@ public class PasswordRecordController {
         }
         passwordRecord.setName(passwordRecordDto.getName());
         passwordRecord.setNote(passwordRecordDto.getNote());
-        passwordRecord.setPassword(passwordRecord.getPassword());
+        passwordRecord.setPassword(passwordRecordDto.getPassword());
         passwordRecord.setSynctimestamp(new Timestamp(System.currentTimeMillis()));
         passwordRecord.setType(passwordRecordDto.getType());
         passwordRecord.setUrl(passwordRecordDto.getUrl());
