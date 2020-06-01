@@ -39,6 +39,7 @@ public class PasswordRecord implements Serializable {
     private Long id;
     @JsonIgnore
     @ManyToOne
+    @JsonIgnore
     private User user;
     // 记录的类型，当前阶段应为login
     private String type;
