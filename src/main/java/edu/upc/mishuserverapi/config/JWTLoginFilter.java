@@ -17,24 +17,24 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import edu.upc.mishuserverapi.dto.User;
+import edu.upc.mishuserverapi.dto.UserDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
- 
+
     public JWTLoginFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
- 
+
     // 接收并解析用户凭证
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest req,
-                                                HttpServletResponse res) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
+            throws AuthenticationException {
         try {
-            User user = new ObjectMapper()
-                    .readValue(req.getInputStream(), User.class);
+            UserDto user = new ObjectMapper()
+                    .readValue(req.getInputStream(), UserDto.class);
  
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
