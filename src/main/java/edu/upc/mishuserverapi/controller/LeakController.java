@@ -14,7 +14,7 @@ import edu.upc.mishuserverapi.model.LeakedPassword;
 import edu.upc.mishuserverapi.repositories.LeakedPasswordRepository;
 
 @RestController
-@RequestMapping("leakedpassword")
+@RequestMapping("/leakedpassword")
 public class LeakController {
     @Autowired
     private LeakedPasswordRepository leakedPasswordRepository;

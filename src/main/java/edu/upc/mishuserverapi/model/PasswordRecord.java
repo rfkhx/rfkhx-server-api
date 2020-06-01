@@ -37,7 +37,6 @@ public class PasswordRecord implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JsonIgnore
     @ManyToOne
     @JsonIgnore
     private User user;

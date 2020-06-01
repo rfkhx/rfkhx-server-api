@@ -22,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/leakedpassword").permitAll()
                 .anyRequest().authenticated()
                 .and()//关闭session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
