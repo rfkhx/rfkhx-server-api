@@ -1,7 +1,6 @@
 package edu.upc.mishuserverapi.service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import edu.upc.mishuserverapi.dto.UserDto;
 import edu.upc.mishuserverapi.error.UserAlreadyExistException;

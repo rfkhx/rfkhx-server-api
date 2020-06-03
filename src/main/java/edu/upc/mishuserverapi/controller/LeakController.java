@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.upc.mishuserverapi.annotation.LimitAccess;
 import edu.upc.mishuserverapi.model.LeakedPassword;
 import edu.upc.mishuserverapi.repositories.LeakedPasswordRepository;
 
@@ -31,6 +32,7 @@ public class LeakController {
     }
 
     @GetMapping
+    @LimitAccess(frequency = 10, millisecond = 1000)
     List<LeakedPassword> check(String shorthash){
         return leakedPasswordRepository.findByShorthashIgnoreCase(shorthash);
     }

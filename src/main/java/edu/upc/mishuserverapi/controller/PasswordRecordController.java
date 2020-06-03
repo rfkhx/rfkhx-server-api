@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.upc.mishuserverapi.annotation.LimitAccess;
 import edu.upc.mishuserverapi.dto.PasswordRecordDto;
 import edu.upc.mishuserverapi.model.PasswordRecord;
 import edu.upc.mishuserverapi.model.User;
@@ -32,6 +33,7 @@ public class PasswordRecordController {
     private PasswordRecordRepository passwordRecordRepository;
 
     @GetMapping
+    @LimitAccess(frequency = 10, millisecond = 1000)
     List<PasswordRecord> getAll(Principal principal){
         log.info("GET");
         User user = userRepository.findByEmail(principal.getName());
@@ -39,6 +41,7 @@ public class PasswordRecordController {
     }
 
     @PostMapping
+    @LimitAccess(frequency = 500, millisecond = 1000)
     PasswordRecord create(PasswordRecordDto passwordRecordDto,Principal principal){
         User user=userRepository.findByEmail(principal.getName());
         PasswordRecord passwordRecord=passwordRecordRepository.findByUserAndNameAndUsername(user, passwordRecordDto.getName(), passwordRecordDto.getUsername());

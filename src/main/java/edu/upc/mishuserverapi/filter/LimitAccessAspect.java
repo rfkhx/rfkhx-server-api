@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -19,6 +18,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import edu.upc.mishuserverapi.annotation.LimitAccess;
 import edu.upc.mishuserverapi.error.RequestLimitException;
+import edu.upc.mishuserverapi.utils.HttpRequestUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,8 +43,7 @@ public class LimitAccessAspect {
             String className = point.getTarget().getClass().getName();
             String methodName = point.getSignature().getName();
             HttpServletRequest request = attributes.getRequest();
-            HttpServletResponse response = attributes.getResponse();
-            String key = className + "." + methodName + "#" + request.getSession().getId();
+            String key = className + "." + methodName + "#" +HttpRequestUtil.getIpAddr(request);
             List<Long> millisecondList = limitMap.get(key);
             long now = System.currentTimeMillis();
             if (null == millisecondList) {
