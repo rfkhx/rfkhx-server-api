@@ -16,6 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/leakedpassword").permitAll()
+                .antMatchers("/user/verify").permitAll()
                 .antMatchers(HttpMethod.POST,"/user").permitAll()
                 .anyRequest().authenticated()
                 .and()//关闭session

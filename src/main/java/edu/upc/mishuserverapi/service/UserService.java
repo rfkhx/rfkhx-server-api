@@ -17,4 +17,5 @@ public interface UserService {
 
     Role createRoleIfNotFound(String name, Collection<Privilege> privileges);
 
+    boolean verifyEmail(String email,String token);
 }
